@@ -1,0 +1,108 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-main: #07111F;
+    --bg-sec: #0B1728;
+    --bg-card: #101F33;
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --green-safe: #22C55E;
+    --green-sec: #16A34A;
+    --amber-warn: #F59E0B;
+    --red-alert: #EF4444;
+    --text-main: #F8FAFC;
+    --text-sec: #94A3B8;
+    --blue-accent: #3B82F6;
+  }
+
+  body {
+    background-color: #07111F;
+    color: #F8FAFC;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color-scheme: dark;
+  }
+
+  /* Custom scrollbar for dark fintech aesthetic */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #07111F;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #101F33;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #1c3252;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.animate-shimmer::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transform: translateX(-100%);
+  background-image: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.03) 25%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.03) 75%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: shimmer 1.8s infinite;
+  content: '';
+}
+
+/* Estilos especiais de impressão / Salvar em PDF pelo navegador */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 10mm 10mm 10mm 10mm;
+  }
+
+  body {
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+    font-size: 11pt;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  header, nav, footer, #navbar, #footer, #report-download-pdf-btn, #report-share-btn, #report-print-btn, #report-json-btn {
+    display: none !important;
+  }
+
+  .rounded-2xl, .rounded-xl {
+    background-color: #f8fafc !important;
+    border: 1px solid #cbd5e1 !important;
+    color: #0f172a !important;
+    box-shadow: none !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+    margin-bottom: 12px !important;
+  }
+
+  h1, h2, h3, h4 {
+    color: #0f172a !important;
+  }
+}
